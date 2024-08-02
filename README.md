@@ -1,5 +1,5 @@
 # What is a Conditional Executor
-I have literally thousands of PowerShell scripts developed over the years. Most, though not all, are some form of function
+I have literally thousands of PowerShell scripts developed over the years. Most, though not all, are a function.  Here is a simple example:
 
    ```powershell
    # Define a function to demonstrate verbose and non-verbose messages
@@ -77,7 +77,7 @@ I have literally thousands of PowerShell scripts developed over the years. Most,
    ```
 I like to test my code in the IDE I am currently using.  So, along with the scripts came hundreds of test harnesses.  Too many harnesses.  An ocean of harnesses.  Eventually, I sat down and knocked out a scripting method that let me leave my test code in my scripts.  The Executor ignores test code when not being run directly from within an IDE or as a simple call from the Terminal (or a Window click).
 
-The Executor got more and less complex over time.  Here is the final version I settled on.  I hope you find the ability to embed test code in your scripts, ignored at contextual runtime.  I use it all of the time.  The two lines at the bottom of the preceding scripts is all it requires, once you have the NotInContextExecutor.ps1 placed in a known location.
+The Executor got more and less complex over time.  Here is the version I settled on.  I hope you find the ability to embed test code in your scripts, ignored at contextual runtime.  I use it all of the time.  The two lines at the bottom of the preceding scripts is all it requires, once you have the NotInContextExecutor.ps1 placed in a known location.
 
 # Overview
 
@@ -102,30 +102,30 @@ To effectively utilize the `NotInContextExecutor.ps1`, follow these instructions
 
    At the end of your PowerShell script file that contains your function, include the `NotInContextExecutor.ps1` by dot-sourcing it. This will allow you to conditionally execute test code when needed.
 
-```powershell
-$command = @"
-Test-ForContext -m "Test message to pass to function"
-"@
-. "path\to\NotInContextExecutor.ps1"
-```
+   ```powershell
+   $command = @"
+   Test-ForContext -m "Test message to pass to function"
+   "@
+   . "path\to\NotInContextExecutor.ps1"
+   ```
 
 ### Example of Function Script
 Here is an example of a PowerShell script with a function that uses the NotInContextExecutor.ps1 for conditional testing:
 
-```powershell
-function Test-ForContext {
-    param (
-        [string]$CustomMessage = "This is a test message."
-    )
-
-    Write-Host "Function Execution: $CustomMessage" -ForegroundColor Green
-}
-# Include the executor script
-$command = @"
-Test-ForContext -m "Test message to pass to function"
-"@
-. "path\to\NotInContextExecutor.ps1"
-```
+   ```powershell
+   function Test-ForContext {
+       param (
+           [string]$CustomMessage = "This is a test message."
+       )
+   
+       Write-Host "Function Execution: $CustomMessage" -ForegroundColor Green
+   }
+   # Include the executor script
+   $command = @"
+   Test-ForContext -m "Test message to pass to function"
+   "@
+   . "path\to\NotInContextExecutor.ps1"
+   ```
 
 ## Using the Harness
 
@@ -134,16 +134,16 @@ To test your script using the NotInContextExecutor.ps1, you can use a test harne
 ## Verbose Mode
 To observe the harness in action, you can modify the $VerbosePreference variable. By default, PowerShell's verbose output is set to SilentlyContinue, meaning it does not display verbose messages. Changing it to Continue will enable you to see detailed messages about the execution process.
 
-```powershell
-# Set verbose preference to display messages
-$VerbosePreference = "Continue"
-```
+   ```powershell
+   # Set verbose preference to display messages
+   $VerbosePreference = "Continue"
+   ```
 
 ### Set verbose preference to display messages
 
-```powershell
-   $VerbosePreference = "Continue"
-```
+   ```powershell
+      $VerbosePreference = "Continue"
+   ```
 
 ## Explanation of Usage
 The NotInContextExecutor.ps1 script acts as a conditional executor, checking the execution context and ensuring that embedded test code only runs when intended. This is particularly useful for developers who want to maintain test code within their scripts without risking accidental execution in production environments.
