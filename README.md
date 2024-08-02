@@ -2,7 +2,7 @@
 I have literally thousands of PowerShell scripts developed over the years. Most, though not all, are some form of function
 
    ```powershell
-    Define a function to demonstrate verbose and non-verbose messages
+   # Define a function to demonstrate verbose and non-verbose messages
    function Test-ForContextInScript {
        <#
        .SYNOPSIS
