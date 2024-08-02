@@ -28,20 +28,21 @@ To effectively utilize the `NotInContextExecutor.ps1`, follow these instructions
    
 ### Example of Function Script
 Here is an example of a PowerShell script with a function that uses the NotInContextExecutor.ps1 for conditional testing:
-    ```powershell
-   function Test-ForContext {
-       param (
-           [string]$CustomMessage = "This is a test message."
-       )
-   
-       Write-Host "Function Execution: $CustomMessage" -ForegroundColor Green
-   }
-   # Include the executor script
-   $command = @"
-   Test-ForContext -m "Test message to pass to function"
-   "@
-   . "path\to\NotInContextExecutor.ps1"
 
+```powershell
+function Test-ForContext {
+    param (
+        [string]$CustomMessage = "This is a test message."
+    )
+
+    Write-Host "Function Execution: $CustomMessage" -ForegroundColor Green
+}
+# Include the executor script
+$command = @"
+Test-ForContext -m "Test message to pass to function"
+"@
+. "path\to\NotInContextExecutor.ps1"
+```
 ## Using the Harness
 
 To test your script using the NotInContextExecutor.ps1, you can use a test harness script similar to **TestCallHarness - INCLUDE AT END OF PS1 FUNCTION SCRIPT.ps1**. This script will set up the execution context and run your test code under the specified conditions.
@@ -59,6 +60,7 @@ To observe the harness in action, you can modify the $VerbosePreference variable
    ```powershell
       $VerbosePreference = "Continue"
    ```
+
 ## Explanation of Usage
 The NotInContextExecutor.ps1 script acts as a conditional executor, checking the execution context and ensuring that embedded test code only runs when intended. This is particularly useful for developers who want to maintain test code within their scripts without risking accidental execution in production environments.
 
