@@ -24,20 +24,50 @@ To effectively utilize the `NotInContextExecutor.ps1`, follow these instructions
    ```powershell
    # At the end of your script
    . "path\to\NotInContextExecutor.ps1"
-
+   ```
+   
 ### Example of Function Script
 Here is an example of a PowerShell script with a function that uses the NotInContextExecutor.ps1 for conditional testing:
-```powershell
-function Test-ForContext {
-    param (
-        [string]$CustomMessage = "This is a test message."
-    )
-
-    Write-Host "Function Execution: $CustomMessage" -ForegroundColor Green
-}
-# Include the executor script
-. "path\to\NotInContextExecutor.ps1"
-```
+    ```powershell
+   function Test-ForContext {
+       param (
+           [string]$CustomMessage = "This is a test message."
+       )
+   
+       Write-Host "Function Execution: $CustomMessage" -ForegroundColor Green
+   }
+   # Include the executor script
+   $command = @"
+   Test-ForContext -m "Test message to pass to function"
+   "@
+   . "path\to\NotInContextExecutor.ps1"
+   ```
 ## Using the Harness
 
-To test your script using the NotInContextExecutor.ps1, you can use a test harness script similar to TestCallHarness - INCLUDE AT END OF PS1 FUNCTION SCRIPT.ps1. This script will set up the execution context and run your test code under the specified conditions.
+To test your script using the NotInContextExecutor.ps1, you can use a test harness script similar to **TestCallHarness - INCLUDE AT END OF PS1 FUNCTION SCRIPT.ps1**. This script will set up the execution context and run your test code under the specified conditions.
+
+## Verbose Mode
+To observe the harness in action, you can modify the $VerbosePreference variable. By default, PowerShell's verbose output is set to SilentlyContinue, meaning it does not display verbose messages. Changing it to Continue will enable you to see detailed messages about the execution process.
+
+   ```powershell
+   # Set verbose preference to display messages
+   $VerbosePreference = "Continue"
+   ```
+
+### Set verbose preference to display messages
+
+   ```powershell
+      $VerbosePreference = "Continue"
+   
+## Explanation of Usage
+The NotInContextExecutor.ps1 script acts as a conditional executor, checking the execution context and ensuring that embedded test code only runs when intended. This is particularly useful for developers who want to maintain test code within their scripts without risking accidental execution in production environments.
+
+By leveraging this utility, you can maintain clean, testable PowerShell scripts that only execute test code when you're ready to do so, keeping your production environments safe and reliable.
+
+Summary
+**Purpose:** Allows conditional execution of test code within PowerShell scripts.
+**Usage:** Include NotInContextExecutor.ps1 in your script and use a harness to execute test code.
+**Verbose Mode:** Set $VerbosePreference to "Continue" to observe the execution process.
+**Benefit:** Maintains test code without risking production execution.
+With this setup, you can confidently develop and test your PowerShell scripts, knowing that test code will only run when explicitly triggered.
+
