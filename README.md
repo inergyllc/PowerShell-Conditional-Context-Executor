@@ -41,7 +41,7 @@ Here is an example of a PowerShell script with a function that uses the NotInCon
    Test-ForContext -m "Test message to pass to function"
    "@
    . "path\to\NotInContextExecutor.ps1"
-   ```
+
 ## Using the Harness
 
 To test your script using the NotInContextExecutor.ps1, you can use a test harness script similar to **TestCallHarness - INCLUDE AT END OF PS1 FUNCTION SCRIPT.ps1**. This script will set up the execution context and run your test code under the specified conditions.
@@ -69,5 +69,6 @@ By leveraging this utility, you can maintain clean, testable PowerShell scripts 
 **Usage:** Include NotInContextExecutor.ps1 in your script and use a harness to execute test code.
 **Verbose Mode:** Set $VerbosePreference to "Continue" to observe the execution process.
 **Benefit:** Maintains test code without risking production execution.
+
 With this setup, you can confidently develop and test your PowerShell scripts, knowing that test code will only run when explicitly triggered.
 
