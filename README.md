@@ -58,13 +58,13 @@ To observe the harness in action, you can modify the $VerbosePreference variable
 
    ```powershell
       $VerbosePreference = "Continue"
-   
+   ```
 ## Explanation of Usage
 The NotInContextExecutor.ps1 script acts as a conditional executor, checking the execution context and ensuring that embedded test code only runs when intended. This is particularly useful for developers who want to maintain test code within their scripts without risking accidental execution in production environments.
 
 By leveraging this utility, you can maintain clean, testable PowerShell scripts that only execute test code when you're ready to do so, keeping your production environments safe and reliable.
 
-Summary
+# Summary
 **Purpose:** Allows conditional execution of test code within PowerShell scripts.
 **Usage:** Include NotInContextExecutor.ps1 in your script and use a harness to execute test code.
 **Verbose Mode:** Set $VerbosePreference to "Continue" to observe the execution process.
