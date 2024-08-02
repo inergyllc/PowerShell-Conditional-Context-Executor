@@ -21,11 +21,13 @@ To effectively utilize the `NotInContextExecutor.ps1`, follow these instructions
 
    At the end of your PowerShell script file that contains your function, include the `NotInContextExecutor.ps1` by dot-sourcing it. This will allow you to conditionally execute test code when needed.
 
-   ```powershell
-   # At the end of your script
-   . "path\to\NotInContextExecutor.ps1"
-   ```
-   
+```powershell
+$command = @"
+Test-ForContext -m "Test message to pass to function"
+"@
+. "path\to\NotInContextExecutor.ps1"
+```
+
 ### Example of Function Script
 Here is an example of a PowerShell script with a function that uses the NotInContextExecutor.ps1 for conditional testing:
 
@@ -43,6 +45,7 @@ Test-ForContext -m "Test message to pass to function"
 "@
 . "path\to\NotInContextExecutor.ps1"
 ```
+
 ## Using the Harness
 
 To test your script using the NotInContextExecutor.ps1, you can use a test harness script similar to **TestCallHarness - INCLUDE AT END OF PS1 FUNCTION SCRIPT.ps1**. This script will set up the execution context and run your test code under the specified conditions.
@@ -50,16 +53,16 @@ To test your script using the NotInContextExecutor.ps1, you can use a test harne
 ## Verbose Mode
 To observe the harness in action, you can modify the $VerbosePreference variable. By default, PowerShell's verbose output is set to SilentlyContinue, meaning it does not display verbose messages. Changing it to Continue will enable you to see detailed messages about the execution process.
 
-   ```powershell
-   # Set verbose preference to display messages
-   $VerbosePreference = "Continue"
-   ```
+```powershell
+# Set verbose preference to display messages
+$VerbosePreference = "Continue"
+```
 
 ### Set verbose preference to display messages
 
-   ```powershell
-      $VerbosePreference = "Continue"
-   ```
+```powershell
+   $VerbosePreference = "Continue"
+```
 
 ## Explanation of Usage
 The NotInContextExecutor.ps1 script acts as a conditional executor, checking the execution context and ensuring that embedded test code only runs when intended. This is particularly useful for developers who want to maintain test code within their scripts without risking accidental execution in production environments.
